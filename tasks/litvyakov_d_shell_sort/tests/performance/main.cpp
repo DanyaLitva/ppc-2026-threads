@@ -2,6 +2,8 @@
 
 #include <algorithm>
 #include <cstddef>
+#include <cstdio>
+#include <numerical_limits>
 #include <random>
 #include <string>
 #include <vector>

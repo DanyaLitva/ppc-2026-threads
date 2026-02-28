@@ -1,7 +1,7 @@
 #include "litvyakov_d_shell_sort/seq/include/ops_seq.hpp"
 
 #include <cmath>
-#include <tuple>
+#include <cstdio>
 #include <utility>
 #include <vector>
 
@@ -47,8 +47,8 @@ void LitvyakovDShellSortSEQ::ShellSortMerge(std::vector<int> &vec) {
     return;
   }
   std::size_t mid = vec.size() / 2;
-  std::vector<int> left(vec.begin(), vec.begin() + static_cast<long>(mid));
-  std::vector<int> right(vec.begin() + static_cast<long>(mid), vec.end());
+  std::vector<int> left(vec.begin(), vec.begin() + static_cast<int64_t>(mid));
+  std::vector<int> right(vec.begin() + static_cast<int64_t>(mid), vec.end());
   BaseShellSort(left);
   BaseShellSort(right);
   Merge(left, right, vec);
