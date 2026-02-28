@@ -3,7 +3,9 @@
 #include <algorithm>
 #include <array>
 #include <cstddef>
+#include <random>
 #include <string>
+#include <vector>
 
 #include "litvyakov_d_shell_sort/common/include/common.hpp"
 #include "litvyakov_d_shell_sort/seq/include/ops_seq.hpp"
@@ -18,11 +20,13 @@ class LitvyakovDShellSortFuncTests : public ppc::util::BaseRunFuncTests<InType, 
     TestType param = std::get<static_cast<int>(ppc::util::GTestParamIndex::kTestParams)>(GetParam());
     int sz = param;
     input_data_ = std::vector<int>(sz, 0);
+    std::mt19937_64 rng(0);
+    std::uniform_int_distribution<int> dist(std::numeric_limits<int>::min(), std::numeric_limits<int>::max());
     for (auto &i : input_data_) {
-      i = rand();
+      i = dist(rng);
     }
     expected_data_ = input_data_;
-    std::sort(expected_data_.begin(), expected_data_.end());
+    std::ranges::sort(expected_data_);
   }
 
   bool CheckTestOutputData(OutType &output_data) final {

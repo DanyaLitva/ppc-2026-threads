@@ -1,8 +1,8 @@
 #include "litvyakov_d_shell_sort/seq/include/ops_seq.hpp"
 
 #include <cmath>
-#include <complex>
 #include <tuple>
+#include <utility>
 #include <vector>
 
 #include "litvyakov_d_shell_sort/common/include/common.hpp"
@@ -14,16 +14,16 @@ void LitvyakovDShellSortSEQ::BaseShellSort(std::vector<int> &vec) {
   auto first = vec.begin();
   auto last = vec.end();
 
-  for (auto d = (last - first) / 2; d != 0; d /= 2) {
-    for (auto i = first + d; i != last; ++i) {
-      for (auto j = i; j - first >= d && (*j < *(j - d)); j -= d) {
-        std::swap(*j, *(j - d));
+  for (auto dist = (last - first) / 2; dist != 0; dist /= 2) {
+    for (auto i = first + dist; i != last; ++i) {
+      for (auto j = i; j - first >= dist && (*j < *(j - dist)); j -= dist) {
+        std::swap(*j, *(j - dist));
       }
     }
   }
 }
 
-void LitvyakovDShellSortSEQ::merge(std::vector<int> &left, const std::vector<int> &right, std::vector<int> &vec) {
+void LitvyakovDShellSortSEQ::Merge(std::vector<int> &left, const std::vector<int> &right, std::vector<int> &vec) {
   vec.clear();
   std::size_t i = 0, j = 0;
   std::size_t left_size = left.size(), right_size = right.size();
@@ -47,11 +47,11 @@ void LitvyakovDShellSortSEQ::ShellSortMerge(std::vector<int> &vec) {
     return;
   }
   std::size_t mid = vec.size() / 2;
-  std::vector<int> left(vec.begin(), vec.begin() + mid);
-  std::vector<int> right(vec.begin() + mid, vec.end());
+  std::vector<int> left(vec.begin(), vec.begin() + static_cast<long>(mid));
+  std::vector<int> right(vec.begin() + static_cast<long>(mid), vec.end());
   BaseShellSort(left);
   BaseShellSort(right);
-  merge(left, right, vec);
+  Merge(left, right, vec);
 }
 
 LitvyakovDShellSortSEQ::LitvyakovDShellSortSEQ(const InType &in) {
@@ -62,7 +62,7 @@ LitvyakovDShellSortSEQ::LitvyakovDShellSortSEQ(const InType &in) {
 
 bool LitvyakovDShellSortSEQ::ValidationImpl() {
   const InType &vec = GetInput();
-  return vec.size() > 0;
+  return !vec.empty();
 }
 
 bool LitvyakovDShellSortSEQ::PreProcessingImpl() {

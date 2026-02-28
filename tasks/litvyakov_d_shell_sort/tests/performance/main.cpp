@@ -29,7 +29,7 @@ class LitvyakovDShellSortRunPerfTest : public ppc::util::BaseRunPerfTests<InType
     }
 
     test_result_ = in;
-    LitvyakovDShellSortSEQ::ShellSortMerge(test_result_);
+    std::ranges::sort(test_result_);
   }
 
   bool CheckTestOutputData(OutType &output_data) final {
