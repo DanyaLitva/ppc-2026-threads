@@ -36,7 +36,7 @@ class LitvyakovDShellSortRunPerfTest : public ppc::util::BaseRunPerfTests<InType
     if (output_data.size() != test_result_.size()) {
       return false;
     }
-    for (int i = 0; i < output_data.size(); ++i) {
+    for (std::size_t i = 0; i < output_data.size(); ++i) {
       if (output_data[i] != test_result_[i]) {
         return false;
       }

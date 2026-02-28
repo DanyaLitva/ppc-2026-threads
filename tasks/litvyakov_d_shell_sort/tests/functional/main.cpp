@@ -30,7 +30,7 @@ class LitvyakovDShellSortFuncTests : public ppc::util::BaseRunFuncTests<InType, 
       return false;
     }
 
-    for (int i = 0; i < output_data.size(); i++) {
+    for (std::size_t i = 0; i < output_data.size(); i++) {
       if (output_data[i] != expected_data_[i]) {
         return false;
       }
