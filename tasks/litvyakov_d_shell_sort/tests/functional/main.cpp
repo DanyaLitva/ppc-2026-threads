@@ -22,7 +22,8 @@ class LitvyakovDShellSortFuncTests : public ppc::util::BaseRunFuncTests<InType, 
     TestType param = std::get<static_cast<int>(ppc::util::GTestParamIndex::kTestParams)>(GetParam());
     int sz = param;
     input_data_ = std::vector<int>(sz, 0);
-    std::mt19937_64 rng(0);
+    std::random_device rd;
+    std::mt19937_64 rng(rd());
     std::uniform_int_distribution<int> dist(std::numeric_limits<int>::min(), std::numeric_limits<int>::max());
     for (auto &i : input_data_) {
       i = dist(rng);
