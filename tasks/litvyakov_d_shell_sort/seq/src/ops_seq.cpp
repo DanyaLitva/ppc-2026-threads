@@ -1,6 +1,7 @@
 #include "litvyakov_d_shell_sort/seq/include/ops_seq.hpp"
 
 #include <cmath>
+#include <cstdint>
 #include <cstdio>
 #include <utility>
 #include <vector>
@@ -25,8 +26,10 @@ void LitvyakovDShellSortSEQ::BaseShellSort(std::vector<int> &vec) {
 
 void LitvyakovDShellSortSEQ::Merge(std::vector<int> &left, const std::vector<int> &right, std::vector<int> &vec) {
   vec.clear();
-  std::size_t i = 0, j = 0;
-  std::size_t left_size = left.size(), right_size = right.size();
+  std::size_t i = 0;
+  std::size_t j = 0;
+  std::size_t left_size = left.size();
+  std::size_t right_size = right.size();
   while (i < left_size && j < right_size) {
     if (left[i] <= right[j]) {
       vec.push_back(left[i++]);

@@ -5,8 +5,6 @@
 #include <cstdio>
 #include <limits>
 #include <random>
-#include <string>
-#include <vector>
 
 #include "litvyakov_d_shell_sort/common/include/common.hpp"
 #include "litvyakov_d_shell_sort/seq/include/ops_seq.hpp"
@@ -17,7 +15,7 @@ namespace litvyakov_d_shell_sort {
 class LitvyakovDShellSortRunPerfTest : public ppc::util::BaseRunPerfTests<InType, OutType> {
  protected:
   void SetUp() override {
-    int dim = 200000;
+    int dim = 1000000;
 
     InType &in = input_data_;
     in.clear();
