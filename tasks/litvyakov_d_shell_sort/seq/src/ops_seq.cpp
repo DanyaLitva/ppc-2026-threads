@@ -25,8 +25,8 @@ void LitvyakovDShellSortSEQ::BaseShellSort(std::vector<int> &vec) {
 
 void LitvyakovDShellSortSEQ::merge(std::vector<int> &left, const std::vector<int> &right, std::vector<int> &vec) {
   vec.clear();
-  size_t i = 0, j = 0;
-  size_t left_size = left.size(), right_size = right.size();
+  int i = 0, j = 0;
+  int left_size = left.size(), right_size = right.size();
   while (i < left_size && j < right_size) {
     if (left[i] <= right[j]) {
       vec.push_back(left[i++]);
@@ -46,7 +46,7 @@ void LitvyakovDShellSortSEQ::ShellSortMerge(std::vector<int> &vec) {
   if (vec.size() <= 1) {
     return;
   }
-  size_t mid = vec.size() / 2;
+  int mid = vec.size() / 2;
   std::vector<int> left(vec.begin(), vec.begin() + mid);
   std::vector<int> right(vec.begin() + mid, vec.end());
   BaseShellSort(left);
