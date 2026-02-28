@@ -21,7 +21,8 @@ class LitvyakovDShellSortRunPerfTest : public ppc::util::BaseRunPerfTests<InType
     in.clear();
     in.reserve(dim);
 
-    std::mt19937_64 rng(0);
+    std::random_device rd;
+    std::mt19937_64 rng(rd());
     std::uniform_int_distribution<int> dist(std::numeric_limits<int>::min(), std::numeric_limits<int>::max());
 
     for (int i = 0; i < dim; ++i) {

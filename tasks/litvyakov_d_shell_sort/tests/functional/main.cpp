@@ -4,6 +4,7 @@
 #include <array>
 #include <cstddef>
 #include <cstdio>
+#include <limits>
 #include <random>
 #include <string>
 #include <vector>
