@@ -7,6 +7,7 @@
 #include <limits>
 #include <random>
 #include <string>
+#include <tuple>
 #include <vector>
 
 #include "litvyakov_d_shell_sort/common/include/common.hpp"

@@ -5,7 +5,6 @@
 #include <cstdio>
 #include <limits>
 #include <random>
-#include <tuple>
 
 #include "litvyakov_d_shell_sort/common/include/common.hpp"
 #include "litvyakov_d_shell_sort/omp/include/ops_omp.hpp"
