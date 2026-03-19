@@ -10,8 +10,8 @@
 #include <vector>
 
 #include "litvyakov_d_shell_sort/common/include/common.hpp"
-#include "litvyakov_d_shell_sort/seq/include/ops_seq.hpp"
 #include "litvyakov_d_shell_sort/omp/include/ops_omp.hpp"
+#include "litvyakov_d_shell_sort/seq/include/ops_seq.hpp"
 #include "util/include/func_test_util.hpp"
 #include "util/include/util.hpp"
 
@@ -69,10 +69,9 @@ TEST_P(LitvyakovDShellSortFuncTests, shellMergeTest) {
 
 const std::array<TestType, 4> kTestParam = {1, 10, 100, 1000};
 
-const auto kTestTasksList =  std::tuple_cat(
+const auto kTestTasksList = std::tuple_cat(
     ppc::util::AddFuncTask<LitvyakovDShellSortSEQ, InType>(kTestParam, PPC_SETTINGS_litvyakov_d_shell_sort),
-    ppc::util::AddFuncTask<LitvyakovDShellSortOMP, InType>(kTestParam, PPC_SETTINGS_litvyakov_d_shell_sort)
-);
+    ppc::util::AddFuncTask<LitvyakovDShellSortOMP, InType>(kTestParam, PPC_SETTINGS_litvyakov_d_shell_sort));
 
 const auto kGtestValues = ppc::util::ExpandToValues(kTestTasksList);
 

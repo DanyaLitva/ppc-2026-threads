@@ -32,7 +32,9 @@ std::vector<std::size_t> LitvyakovDShellSortOMP::GetBounds(std::size_t n, std::s
 
   for (std::size_t i = 0; i < parts; ++i) {
     bounds.push_back(bounds.back() + base);
-    if (i < rem) bounds[i + 1]++;
+    if (i < rem) {
+      bounds[i + 1]++;
+    }
   }
 
   return bounds;
@@ -69,15 +71,15 @@ bool LitvyakovDShellSortOMP::RunImpl() {
   for (int i = 0; i < static_cast<int>(parts_count); ++i) {
     const std::size_t l = bounds[i];
     const std::size_t r = bounds[i + 1];
-    BaseShellSort(vec.begin() + static_cast<std::ptrdiff_t>(l),
-                  vec.begin() + static_cast<std::ptrdiff_t>(r));
+    BaseShellSort(vec.begin() + static_cast<std::ptrdiff_t>(l), vec.begin() + static_cast<std::ptrdiff_t>(r));
   }
 
-  //cppreference.com: 
-  // void inplace_merge( BidirIt first, BidirIt middle, BidirIt last ),
-  // Merges two consecutive sorted ranges [first, middle) and [middle, last) into one sorted range [first, last).
+  // cppreference.com:
+  //  void inplace_merge( BidirIt first, BidirIt middle, BidirIt last ),
+  //  Merges two consecutive sorted ranges [first, middle) and [middle, last) into one sorted range [first, last).
   for (std::size_t i = 1; i < parts_count; ++i) {
-    std::inplace_merge(vec.begin(), vec.begin() + static_cast<std::ptrdiff_t>(bounds[i]), vec.begin() + static_cast<std::ptrdiff_t>(bounds[i + 1]));
+    std::inplace_merge(vec.begin(), vec.begin() + static_cast<std::ptrdiff_t>(bounds[i]),
+                       vec.begin() + static_cast<std::ptrdiff_t>(bounds[i + 1]));
   }
 
   return true;
