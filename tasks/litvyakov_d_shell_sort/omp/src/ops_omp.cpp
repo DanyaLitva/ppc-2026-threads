@@ -4,6 +4,7 @@
 
 #include <algorithm>
 #include <cstddef>
+#include <cstdio>
 #include <vector>
 
 #include "litvyakov_d_shell_sort/common/include/common.hpp"
