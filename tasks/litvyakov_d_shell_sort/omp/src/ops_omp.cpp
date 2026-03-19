@@ -5,7 +5,6 @@
 #include <algorithm>
 #include <cstddef>
 #include <cstdio>
-#include <utility>
 #include <vector>
 
 #include "litvyakov_d_shell_sort/common/include/common.hpp"
@@ -68,9 +67,10 @@ bool LitvyakovDShellSortOMP::RunImpl() {
   const std::size_t threads = std::max(1, omp_get_max_threads());
   const std::size_t parts_count = std::min<std::size_t>(threads, vec.size());
   const auto bounds = GetBounds(vec.size(), parts_count);
+  int parts_count_t = static_cast<int>(parts_count);
 
 #pragma omp parallel for default(none) shared(vec, bounds, parts_count) schedule(static)
-  for (int i = 0; std::cmp_less(i, parts_count); ++i) {
+  for (int i = 0; i < parts_count_t; ++i) {
     const std::size_t l = bounds[i];
     const std::size_t r = bounds[i + 1];
     BaseShellSort(vec.begin() + static_cast<std::ptrdiff_t>(l), vec.begin() + static_cast<std::ptrdiff_t>(r));
