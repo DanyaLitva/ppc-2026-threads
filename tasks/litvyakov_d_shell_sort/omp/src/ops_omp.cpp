@@ -69,7 +69,7 @@ bool LitvyakovDShellSortOMP::RunImpl() {
   const auto bounds = GetBounds(vec.size(), parts_count);
   int parts_count_t = static_cast<int>(parts_count);
 
-#pragma omp parallel for default(none) shared(vec, bounds, parts_count) schedule(static)
+#pragma omp parallel for default(none) shared(vec, bounds, parts_count_t) schedule(static)
   for (int i = 0; i < parts_count_t; ++i) {
     const std::size_t l = bounds[i];
     const std::size_t r = bounds[i + 1];
