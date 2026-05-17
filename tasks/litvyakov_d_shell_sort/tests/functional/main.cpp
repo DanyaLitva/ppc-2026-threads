@@ -10,6 +10,7 @@
 #include <tuple>
 #include <vector>
 
+#include "litvyakov_d_shell_sort/all/include/ops_all.hpp"
 #include "litvyakov_d_shell_sort/common/include/common.hpp"
 #include "litvyakov_d_shell_sort/omp/include/ops_omp.hpp"
 #include "litvyakov_d_shell_sort/seq/include/ops_seq.hpp"
@@ -76,7 +77,8 @@ const auto kTestTasksList = std::tuple_cat(
     ppc::util::AddFuncTask<LitvyakovDShellSortSEQ, InType>(kTestParam, PPC_SETTINGS_litvyakov_d_shell_sort),
     ppc::util::AddFuncTask<LitvyakovDShellSortOMP, InType>(kTestParam, PPC_SETTINGS_litvyakov_d_shell_sort),
     ppc::util::AddFuncTask<LitvyakovDShellSortTBB, InType>(kTestParam, PPC_SETTINGS_litvyakov_d_shell_sort),
-    ppc::util::AddFuncTask<LitvyakovDShellSortSTL, InType>(kTestParam, PPC_SETTINGS_litvyakov_d_shell_sort));
+    ppc::util::AddFuncTask<LitvyakovDShellSortSTL, InType>(kTestParam, PPC_SETTINGS_litvyakov_d_shell_sort),
+    ppc::util::AddFuncTask<LitvyakovDShellSortALL, InType>(kTestParam, PPC_SETTINGS_litvyakov_d_shell_sort));
 
 const auto kGtestValues = ppc::util::ExpandToValues(kTestTasksList);
 
