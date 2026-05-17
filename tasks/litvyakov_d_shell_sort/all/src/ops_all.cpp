@@ -127,6 +127,9 @@ bool LitvyakovDShellSortALL::RunImpl() {
                     local_vec.begin() + static_cast<std::ptrdiff_t>(r));
     }
 
+    // cppreference.com:
+    //  void inplace_merge( BidirIt first, BidirIt middle, BidirIt last ),
+    //  Merges two consecutive sorted ranges [first, middle) and [middle, last) into one sorted range [first, last).
     for (std::size_t i = 1; i < parts_count; ++i) {
       std::inplace_merge(local_vec.begin(), local_vec.begin() + static_cast<std::ptrdiff_t>(bounds[i]),
                          local_vec.begin() + static_cast<std::ptrdiff_t>(bounds[i + 1]));
