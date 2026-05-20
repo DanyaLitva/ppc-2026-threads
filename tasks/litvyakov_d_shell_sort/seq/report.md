@@ -81,7 +81,7 @@ cd build/bin
 
 ```bash
 # Функциональные тесты
-.\ppc_func_tests.exe --gtest_repeat=5 --gtest_filter="*litvyakov_d_shell_sort_seq*"
+.\ppc_func_tests.exe --gtest_repeat=5 --gtest_filter="*litvyakov_d_shell_sort_seq_enabled*"
 
 # Тесты производительности
 .\ppc_perf_tests --gtest_repeat=5 --gtest_filter="*task_run_litvyakov_d_shell_sort_seq_enabled"
