@@ -119,20 +119,20 @@ cd build/bin
 
 ## Приложение
 
-<!-- markdownlint-disable MD013 -->
 ```cpp
 void LitvyakovDShellSortSEQ::ShellSortMerge(std::vector<int> &vec) {
   if (vec.size() <= 1) {
     return;
   }
   std::size_t mid = vec.size() / 2;
-  std::vector<int> left(vec.begin(), vec.begin() + static_cast<int64_t>(mid));
-  std::vector<int> right(vec.begin() + static_cast<int64_t>(mid), vec.end());
+  std::vector<int> left(vec.begin(),
+                        vec.begin() + static_cast<int64_t>(mid));
+  std::vector<int> right(vec.begin() + static_cast<int64_t>(mid),
+                         vec.end());
   BaseShellSort(left);
   BaseShellSort(right);
   Merge(left, right, vec);
 }
 ```
-<!-- markdownlint-enable MD013 -->
 
 Массив делится пополам, каждая половина сортируется независимо, затем происходит слияние.

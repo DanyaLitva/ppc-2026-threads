@@ -37,20 +37,18 @@
 
 Ключевой примитив — `tbb::parallel_for` с диапазоном `tbb::blocked_range<std::size_t>`:
 
-<!-- markdownlint-disable MD013 -->
 ```cpp
 tbb::parallel_for(
-  tbb::blocked_range<std::size_t>(0, parts_count),
-  [&](const tbb::blocked_range<std::size_t> &range) {
-    for (std::size_t i = range.begin(); i != range.end(); ++i) {
-      const std::size_t l = bounds[i];
-      const std::size_t r = bounds[i + 1];
-      BaseShellSort(vec.begin() + static_cast<std::ptrdiff_t>(l),
-                    vec.begin() + static_cast<std::ptrdiff_t>(r));
-    }
-  });
+    tbb::blocked_range<std::size_t>(0, parts_count),
+    [&](const tbb::blocked_range<std::size_t> &range) {
+      for (std::size_t i = range.begin(); i != range.end(); ++i) {
+        const std::size_t l = bounds[i];
+        const std::size_t r = bounds[i + 1];
+        BaseShellSort(vec.begin() + static_cast<std::ptrdiff_t>(l),
+                      vec.begin() + static_cast<std::ptrdiff_t>(r));
+      }
+    });
 ```
-<!-- markdownlint-enable MD013 -->
 
 Партиционер не задаётся явно — используется Auto Partitioner по умолчанию. Синхронизация
 внутри параллельного блока не нужна: диапазоны блоков не пересекаются. После завершения

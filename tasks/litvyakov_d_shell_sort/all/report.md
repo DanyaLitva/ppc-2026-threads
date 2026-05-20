@@ -79,7 +79,8 @@
 ## 8. Экспериментальная среда и результаты
 
 ```bash
-mpiexec -n 2 .\ppc_perf_tests.exe --gtest_repeat=5 --gtest_filter="*litvyakov_d_shell_sort_all*"
+mpiexec -n 2 .\ppc_perf_tests.exe \
+    --gtest_repeat=5 --gtest_filter="*litvyakov_d_shell_sort_all*"
 ```
 
 Тестовые данные: массив из 2 000 000 элементов.
@@ -107,17 +108,18 @@ mpiexec -n 2 .\ppc_perf_tests.exe --gtest_repeat=5 --gtest_filter="*litvyakov_d_
 
 ## Приложение
 
-<!-- markdownlint-disable MD013 -->
 ```cpp
-  MPI_Scatterv(world_rank == 0 ? vec.data() : nullptr, sendcounts.data(),
-               displs.data(), MPI_INT, local_vec.data(),
-               sendcounts[world_rank], MPI_INT, 0, MPI_COMM_WORLD);
+  MPI_Scatterv(world_rank == 0 ? vec.data() : nullptr,
+               sendcounts.data(), displs.data(), MPI_INT,
+               local_vec.data(), sendcounts[world_rank],
+               MPI_INT, 0, MPI_COMM_WORLD);
 
   ShellSortMerge(local_vec); // Гибридное OpenMP-ядро
 
   MPI_Gatherv(local_vec.data(), sendcounts[world_rank], MPI_INT,
               world_rank == 0 ? vec.data() : nullptr,
-              sendcounts.data(), displs.data(), MPI_INT, 0, MPI_COMM_WORLD);
+              sendcounts.data(), displs.data(),
+              MPI_INT, 0, MPI_COMM_WORLD);
 
   if (world_rank == 0) {
     for (int i = 1; i < world_size; ++i) {
@@ -125,13 +127,11 @@ mpiexec -n 2 .\ppc_perf_tests.exe --gtest_repeat=5 --gtest_filter="*litvyakov_d_
         std::inplace_merge(
             vec.begin(),
             vec.begin() + static_cast<std::ptrdiff_t>(displs[i]),
-            vec.begin() + static_cast<std::ptrdiff_t>(displs[i])
-                         + static_cast<std::ptrdiff_t>(sendcounts[i]));
+            vec.begin() + static_cast<std::ptrdiff_t>(displs[i] + sendcounts[i]));
       }
     }
   }
 ```
-<!-- markdownlint-enable MD013 -->
 
 Scatter рассылает данные, каждый процесс сортирует свой блок, Gather собирает результат.
 Финальное слияние выполняется только на rank 0.
