@@ -71,8 +71,8 @@ cd build/bin
 
 Базовое время (SEQ): **0.059871 с**.
 
-| Backend | Mode | Size | Workers / ranks × threads | Median time, s | Speedup vs seq | Efficiency |
-| ------- | ---- | ---- | ------------------------- | -------------: | -------------: | ---------: |
+| Technology | Mode | Size | Workers / ranks × threads | Median time, s | Speedup vs seq | Efficiency |
+| ---------- | ---- | ---- | ------------------------- | -------------: | -------------: | ---------: |
 | SEQ | task_run | `2 000 000` | `1` | 0.059871 | 1.00 | 1.00 |
 | OMP | task_run | `2 000 000` | `2` | 0.044162 | 1.36 | 0.68 |
 | OMP | task_run | `2 000 000` | `4` | 0.023395 | 2.56 | 0.64 |
